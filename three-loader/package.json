@@ -1,0 +1,107 @@
+{
+  "_from": "@pnext/three-loader@0.2.2",
+  "_id": "@pnext/three-loader@0.2.2",
+  "_inBundle": false,
+  "_integrity": "sha512-Gmg4/l/RZkBG8EZf9r96BJyZFGJZNjs5x8Z9ZqWLxu25SemZVzUcAwDQUzMQEgr1bqi9hIHCVYgI891rtuqI+A==",
+  "_location": "/@pnext/three-loader",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@pnext/three-loader@0.2.2",
+    "name": "@pnext/three-loader",
+    "escapedName": "@pnext%2fthree-loader",
+    "scope": "@pnext",
+    "rawSpec": "0.2.2",
+    "saveSpec": null,
+    "fetchSpec": "0.2.2"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@pnext/three-loader/-/three-loader-0.2.2.tgz",
+  "_shasum": "f6896a0e0ca4356ffdc5148710fcabc146172315",
+  "_spec": "@pnext/three-loader@0.2.2",
+  "_where": "E:\\ntl",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/pnext/three-loader/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Hugo Campos",
+      "email": "hugo.campos@pix4d.com"
+    }
+  ],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Potree loader for ThreeJS, converted and adapted to Typescript.",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@types/node": "^13.13.21",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-preset-env": "^1.7.0",
+    "circular-dependency-plugin": "^5.2.0",
+    "css-loader": "^3.6.0",
+    "html-loader": "^1.3.1",
+    "html-webpack-plugin": "^4.5.0",
+    "install": "^0.13.0",
+    "prettier": "1.19.1",
+    "raw-loader": "^4.0.1",
+    "rimraf": "^3.0.2",
+    "size-plugin": "^2.0.1",
+    "standard-version": "^9.0.0",
+    "style-loader": "^1.2.1",
+    "three": "0.120.1",
+    "three-orbit-controls": "^82.1.0",
+    "ts-loader": "^6.2.2",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "worker-loader": "^2.0.0"
+  },
+  "homepage": "https://github.com/pnext/three-loader#readme",
+  "keywords": [
+    "three",
+    "threejs",
+    "potree",
+    "pointcloud",
+    "point cloud",
+    "points",
+    "gis",
+    "loader",
+    "3d",
+    "webgl",
+    "geo",
+    "gis",
+    "photogrammetry"
+  ],
+  "license": "MIT",
+  "main": "build/potree.js",
+  "name": "@pnext/three-loader",
+  "peerDependencies": {
+    "three": "^0.120.1"
+  },
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnext/three-loader.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run lint && webpack --mode production --progress --config webpack.config.prod.js",
+    "clean": "rimraf build",
+    "lint": "tslint --project tsconfig.json",
+    "prepare-release": "standard-version",
+    "prettier": "prettier --write \"**/*.js\" \"**/*.jsx\" \"**/*.tsx\" \"**/*.ts\"",
+    "start": "webpack --mode development --watch --progress",
+    "start:example": "webpack-dev-server --config webpack.config.example.js --mode development --progress"
+  },
+  "typings": "build/declarations/index.d.ts",
+  "version": "0.2.2"
+}

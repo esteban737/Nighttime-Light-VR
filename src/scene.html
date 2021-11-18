@@ -1,0 +1,528 @@
+<a-scene 
+	light="defaultLightsEnabled: false" 
+	start-up
+	loading-screen="dotsColor: #ffff02; backgroundColor: black"
+	potree-loader="pointBudget: 50;"
+	stats
+>
+	<a-assets>
+
+	</a-assets>
+
+	<a-sky color="black"></a-sky>
+
+	<a-entity 
+		environment="
+			preset: starry;
+			lighting: none;
+			fog: 0;
+			skyType: none;
+			grid: none;
+			ground: none;
+		"
+	>
+		<a-entity class = "cloudContainer" scale=".5 .5 1" rotation="-90 0 0" scaleheight = 0.01>
+			<a-entity
+				visible='false'
+				class="label"
+				label-container
+			>
+
+			</a-entity>
+
+			<a-entity
+				visible='true'
+				class="border"
+				border-container
+			>
+			</a-entity>
+			<!-- <a-entity 
+				visible="false"
+				class="cloud"
+				potree-loader="
+					year: 1992;
+					pointColorType: elevation;
+					pointSizeType: adaptive;
+					gradient: yellow;
+					weighted: false;
+					clipMode: clip_disabled;
+				"
+			>	
+			</a-entity>
+			<a-entity 
+				visible="true"
+				class="cloud"
+				potree-loader="
+					year: 2013;
+					pointColorType: elevation;
+					pointSizeType: adaptive;
+					gradient: red;
+					weighted: false;
+					clipMode: clip_disabled;
+				"
+			>	
+			</a-entity> -->
+			<a-entity
+				id='map'
+				visible= 'true'
+				ol="
+					full: true;
+					aframeEvent: click;
+					OlEvent: click;
+					pixToVRRatio:150;
+				"
+			>
+			</a-entity>
+		</a-entity>
+
+	</a-entity>
+
+	<a-entity
+		class="clipbox"
+		material="shader: flat; opacity: 0.0 transparent: true; depthWrite: false"
+		position="0 0 -5"
+		scale="1 1 1"
+		clip-box
+		raycastable
+	>
+
+	</a-entity>
+
+	<!-- <a-entity 
+		id="surfacecursorleft" 
+		geometry="primitive: sphere; radius: .01" 
+		material="shader: flat; color: #ff0000; 
+		transparent: true; opacity: .5;" 
+		position="0 0 0"
+	>
+	</a-entity>
+
+	<a-entity 
+		id="surfacecursorright" 
+		geometry="primitive: sphere; radius: .01" 
+		material="shader: flat; color: #ff0000; transparent: true; opacity: .5;" 
+		position="0 0 0"
+	>
+	</a-entity> -->
+
+	<!-- <a-entity 
+		id="surfacecursorrmouse" 
+		geometry="primitive: sphere; radius: .01" 
+		material="shader: flat; color: #ff0000; transparent: true; opacity: .5;" 
+		position="0 0 0"
+	>
+	</a-entity> -->
+
+	<a-entity 
+		id="mouse"
+		teleport-controls=
+			"cameraRig: #cameraRig; 
+			teleportOrigin: #head; 
+			collisionEntities: .teleport-sphere;
+			startEvents: teleportstart;
+			type: line;
+			maxLength: 100;
+			landingMaxAngle: 360;
+			endEvents: teleportend"
+		visible="true" 
+		cursor="rayOrigin: mouse" 
+		raycaster="objects: [raycastable];" 
+		raycastermap
+	>
+		<!-- <a-entity 
+			class="flatcursor"
+			visible="false" 
+			geometry="primitive: sphere; radius: .05" 
+			material="shader: flat; color: #ff0000" 
+			position="0 0 -1.2"
+		>
+		</a-entity> -->
+	</a-entity>
+
+	<a-entity 
+		class="teleport-sphere"
+		visible="false" 
+		geometry="primitive: sphere; radius: 1" 
+		material="shader: flat; color: gray" 
+		position="0 25 15"
+	>
+	</a-entity>
+
+	<a-entity 
+		class="teleport-sphere" 
+		visible="false" 
+		geometry="primitive: sphere; radius: 1" 
+		material="shader: flat; color: gray" 
+		position="3.11196 5 -0.17301">
+	</a-entity>
+
+	<a-entity 
+		class="teleport-sphere" 
+		visible="false" 
+		geometry="primitive: sphere"
+		material="shader: flat; color: gray" 
+		position="-26.68611 5 4.67831">
+	</a-entity>
+
+	<a-entity 
+		class="teleport-sphere" 
+		visible="false" 
+		geometry="primitive: sphere" 
+		material="shader: flat; color: gray" 
+		position="-46.20012 5 -13.81325">
+	</a-entity>
+
+	<a-entity 
+		class="teleport-sphere" 
+		visible="false" 
+		geometry="primitive: sphere" 
+		material="shader: flat; color: gray" 
+		position="2.07411 5 -21.72918">
+	</a-entity>
+
+	<a-entity 
+		class="teleport-sphere" 
+		visible="false" 
+		geometry="primitive: sphere" 
+		material="shader: flat; color: gray" 
+		position="32.52859 5 -13.93755">
+	</a-entity>
+
+	<a-entity 
+		class="teleport-sphere" 
+		visible="false" 
+		geometry="primitive: sphere" 
+		material="shader: flat; color: gray" 
+		position="53.99834 5 0.46089">
+	</a-entity>
+
+	<a-entity id="cameraRig"  movement-controls = "fly: true; speed: .3" position="0 0 20">
+		<a-entity id="head" camera look-controls position="0 1.6 0">
+			<a-gui-flex-container 
+				visible='true'
+				id="year-selector"
+				flex-direction="row" 
+				justify-content="center"
+				align-items="normal" 
+				opacity="1.0" 
+				width="5" 
+				height="3" 
+				panel-color="gray" 
+				panel-rounded="0.03"
+				position="0 0 -5"
+				is-top-container="true"
+				overlay-ui
+				year-selector
+			>
+				<a-gui-flex-container
+					class='raycastable'
+					flex-direction="column" 
+					justify-content="center"
+					align-items="normal" 
+					opacity="1.0" 
+					width="2.5" 
+					height="3" 
+					panel-color="gray" 
+					panel-rounded="0.03"
+					position="0 0 -5"
+					raycastable
+				>
+					<a-gui-toggle
+						class='raycastable'
+						id="year-toggle"
+						raycastable
+						width="2.5" height="0.75"
+						value="Current/Preview"
+						font-family="assets/fonts/Plaster-Regular.ttf"
+						font-size="0.2"
+						margin="0 0 0.05 0"
+						border-color="#FFC20A"
+						active-color="#0C7BDC"
+					>
+					</a-gui-toggle>
+					<a-gui-radio
+						id="currentRadio"
+						width="2" 
+						height="0.5"
+						value="Current Year: 0000"
+						font-size="0.15"
+						margin="0 0 0.05 0"
+						handle-color="#FFC20A"
+					>
+					</a-gui-radio>
+					<a-gui-radio
+						id="previewRadio"
+						width="2" 
+						height="0.5"
+						value="Preview Year: 0000"
+						font-size="0.15"
+						margin="0 0 0.05 0"
+						handle-color="#0C7BDC"
+					>
+					</a-gui-radio>
+				</a-gui-flex-container>
+				<a-gui-flex-container 
+					class='raycastable'
+					id="firstyears"
+					flex-direction="column" 
+					justify-content="center"
+					align-items="normal" 
+					opacity="1.0" 
+					width="1" 
+					height="3" 
+					panel-color="gray" 
+					panel-rounded="0.03"
+					position="0 0 -5"
+					raycastable
+				>
+				</a-gui-flex-container>
+				<a-gui-flex-container
+					class='raycastable'
+					id="secondyears"
+					flex-direction="column" 
+					justify-content="center"
+					align-items="normal" 
+					opacity="1.0" 
+					width="1" 
+					height="3" 
+					panel-color="gray" 
+					panel-rounded="0.03"
+					position="0 0 -5"
+					raycastable
+				>
+				</a-gui-flex-container>
+			</a-gui-flex-container>
+		</a-entity>
+		<a-entity 
+			id="ctlR" 
+			visible="false"
+			raycaster="objects: [raycastable]; showLine: false; enabled: false;" 
+			oculus-touch-controls="hand: right"
+			cursor="rayOrigin: entity"
+			raycastermap 
+		>
+			<a-entity 
+				class="flatcursor"
+				visible="false"
+				geometry="primitive: sphere; radius: .05" 
+				material="shader: flat; color: #ff0000" 
+				position="0 0 -1.2"
+			>
+			</a-entity>
+		</a-entity>
+		<a-entity 
+			id="ctlL"
+			visible="false"
+			raycaster="objects: [raycastable]; showLine: false; enabled: false;"
+			cursor="rayOrigin: entity"
+			teleport-controls=
+				"cameraRig: #cameraRig; 
+				teleportOrigin: #head; 
+				collisionEntities: .teleport-sphere;
+				startEvents: teleportstart;
+				type: line;
+				maxLength: 100;
+				landingMaxAngle: 360;
+				endEvents: teleportend"
+			oculus-touch-controls="hand: left;" 
+			raycastermap
+		>
+			<a-gui-flex-container
+				visible = 'false'
+				id = "handstats"
+				flex-direction="column" 
+				justify-content="center"
+				align-items="normal" 
+				opacity="1.0" 
+				width=".2" 
+				height="0.15" 
+				panel-color="#d3d3d4" 
+				panel-rounded="0.03"
+				position="0 .15 0"
+				is-top-container="true"
+				shade-ui
+				flat-ui
+			>
+				<a-gui-label
+					width=".2" height="0.04"
+					value="Session Info"
+					font-family="assets/fonts/DiplomataSC-Regular.ttf"
+					font-size="0.015"
+					letter-spacing="0"
+					margin="0 0 0 0"
+					text-depth="0.001"
+					background-transparent="true"
+				>
+				</a-gui-label>
+				<a-gui-label
+					id="currentLabel"
+					width=".2" height="0.03"
+					value="Current Year: 1992"
+					font-family="assets/fonts/DiplomataSC-Regular.ttf"
+					font-size="0.013"
+					margin="0 0 0 0"
+					text-depth="0.001"
+					background-transparent="true"
+				>
+				</a-gui-label>
+				<a-gui-label
+					id="previewLabel"
+					width=".2" height="0.03"
+					value="Preview Year: 0000"
+					font-family="assets/fonts/DiplomataSC-Regular.ttf"
+					font-size="0.013"
+					margin="0 0 0 0"
+					text-depth="0.001"
+					background-transparent="true"
+				>
+				</a-gui-label>
+				<a-gui-label
+					width=".2" height="0.03"
+					value="Frames Per Second: 60"
+					font-family="assets/fonts/DiplomataSC-Regular.ttf"
+					font-size="0.013"
+					margin="0 0 0 0"
+					text-depth="0.001"
+					background-transparent="true"
+					fps
+				>
+				</a-gui-label>
+			</a-gui-flex-container>
+		</a-entity>
+	</a-entity>
+
+	<!-- <a-text
+		position = '0 5 0'
+		scale = '10 10 10'
+		rotation = '-90 0 0'
+		value =  'HELLOOOOO'
+		look-camera
+		align = 'center'
+	>
+
+	</a-text> -->
+</a-scene>
+
+	<!-- <a-entity
+		visible = "false"
+		material="shader: flat; src: #pngAsia; color: #ffff02"
+		class="ntlplane raycastable" 
+		rotation="-90 0 0" 
+		position="0 0 0"
+	>
+	</a-entity> -->
+
+			<!-- <a-entity
+			visible="true"
+			class="heatmap" 
+			aframe-heatmap3d=
+				"src: #pngAsia;
+				scaleOpacityMethod: linear;
+				loadingAnimDur: 0;
+				shininess: 0;
+				stretch: true;
+				metalness: 0;
+				roughness: 0;
+				palette: ['#ff0000'];
+				opacityMin: 0.0;
+				opacityMax: 0.7;
+				emissiveIntensity: 0.0;
+				invertElevation: true;
+				height: 20;"
+			scale='1 .7 1'
+			position= '0 1 0'
+		>
+		</a-entity> -->
+
+
+
+		<!-- <a-entity 
+			visible="false"
+			class="cloud"
+			position="0 0 0"
+        	rotation="-90 0 0"
+			potree-loader=
+			"src: assets/clouds/2013/;
+			pointSize: 1;
+			pointColorType: elevation;
+			pointSizeType: adaptive;
+			scaleHeight: 0.01;
+			gradient: red;
+			"
+		>
+		</a-entity> -->
+
+		<!-- <a-entity 
+			class="cloud"
+			position="0 15 0"
+        	rotation="-90 0 0"
+			potree-loader=
+			"src: assets/clouds/1992/;
+			pointSize: 5;
+			pointColorType: elevation;
+			pointSizeType: fixed;
+			scaleHeight: .05"
+		>
+		</a-entity> -->
+
+
+		<!-- <a-entity
+			visible="true"
+			class="heatmap" 
+			scale='1 1 1'
+			position="0 .1 0"
+			lightheatmap
+		>
+		</a-entity>
+
+		<a-entity
+			visible="true"
+			class="heatmap" 
+			scale='1 1 1'
+			position="0 .1 0"
+			lightheatmap="
+				src: #2010;
+				palette: ['#FF0000']
+			"
+		>
+		</a-entity>
+
+		<a-entity
+			visible="true"
+			class="heatmapcompare" 
+			scale='1 1 1'
+			position="0 1.5 0"
+			lightheatmap="
+				src: compare;
+			"
+		>
+		</a-entity>
+
+-->
+<!-- 
+		<a-entity
+			visible="true"
+			class="heatmap" 
+			aframe-heatmap3d=
+				"src: #2010;
+				scaleOpacityMethod: linear;
+				loadingAnimDur: 0;
+				shininesss: 0;
+				stretch: true;
+				metalness: 0;
+				roughness: 0;
+				palette: ['#FF0000'];
+				opacityMin: 0.0;
+				opacityMax: .7;
+				emissiveIntensity: 0.0;
+				invertElevation: true;
+				height: 20;"
+			scale='1 1 1'
+			position="0 .1 0"
+			lightheatmap
+		>
+		</a-entity> -->
+
+		<!-- <img id="1992" crossorigin="anonymous" src="https://cdn.glitch.com/35a0f071-00a7-47ae-be08-e6beb588af48%2F1992%20(14).png?v=1616217647802"  style="display:none"/>
+		<img id="2010" crossorigin="anonymous" src="https://cdn.glitch.com/35a0f071-00a7-47ae-be08-e6beb588af48%2F2010%20(3).png?v=1616217609174"  style="display:none"/>
+		<img id="compare" crossorigin="anonymous" style="display:none"/> -->
